@@ -8,7 +8,12 @@ jobs:
       - checkout
       - setup_remote_docker: 
          docker_layer_caching: true 
-      - run: docker build -t sebastianneb/aws_deployer:latest .
+      - run: >
+          docker build -t sebastianneb/aws_deployer:latest
+          --build-arg BUILD_TIME=$(date)
+          --build-arg REPOSITORY_URL=$CIRCLE_REPOSITORY_URL
+          --build-arg REVISION=$CIRCLE_SHA1
+          --build-arg VERSION=v0.0.0-SNAPSHOT .
   release:
     executor: docker/docker
     steps:
@@ -16,7 +21,12 @@ jobs:
       - setup_remote_docker: 
          docker_layer_caching: true
       - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      - run: docker build -t sebastianneb/aws_deployer:$CIRCLE_TAG .
+      - run: >
+          docker build -t sebastianneb/aws_deployer:latest
+          --build-arg BUILD_TIME=$(date)
+          --build-arg REPOSITORY_URL=$CIRCLE_REPOSITORY_URL
+          --build-arg REVISION=$CIRCLE_SHA1
+          --build-arg VERSION=$CIRCLE_TAG .
       - run: docker tag sebastianneb/aws_deployer:$CIRCLE_TAG sebastianneb/aws_deployer:latest
       - run: docker push sebastianneb/aws_deployer:$CIRCLE_TAG
       - run: docker push sebastianneb/aws_deployer:latest

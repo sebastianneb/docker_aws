@@ -7,7 +7,7 @@ ARG VERSION
 
 LABEL maintainer="Sebastian Neb <Sebastian.Neb@me.com>"
 LABEL name="sebastianneb/aws_deployer"
-LABEL title="AWS Deployed"
+LABEL title="AWS Deployer"
 LABEL org.opencontainers.image.created=$BUILD_TIME
 LABEL org.opencontainers.image.authors="Sebastian Neb <Sebastian.Neb@me.com>"
 LABEL org.opencontainers.image.url=$REPOSITORY_URL

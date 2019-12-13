@@ -7,10 +7,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker: 
-         docker_layer_caching: true 
+         docker_layer_caching: true
+      - run: export BUILD_TIME=$(date)
       - run: >
           docker build -t sebastianneb/aws_deployer:latest
-          --build-arg BUILD_TIME=$(date)
+          --build-arg BUILD_TIME=$BUILD_TIME
           --build-arg REPOSITORY_URL=$CIRCLE_REPOSITORY_URL
           --build-arg REVISION=$CIRCLE_SHA1
           --build-arg VERSION=v0.0.0-SNAPSHOT .
@@ -21,9 +22,10 @@ jobs:
       - setup_remote_docker: 
          docker_layer_caching: true
       - run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+      - run: export BUILD_TIME=$(date)
       - run: >
           docker build -t sebastianneb/aws_deployer:latest
-          --build-arg BUILD_TIME=$(date)
+          --build-arg BUILD_TIME=$BUILD_TIME
           --build-arg REPOSITORY_URL=$CIRCLE_REPOSITORY_URL
           --build-arg REVISION=$CIRCLE_SHA1
           --build-arg VERSION=$CIRCLE_TAG .

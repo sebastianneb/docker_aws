@@ -1,24 +1,5 @@
 FROM debian:buster-slim
 
-ARG BUILD_TIME
-ARG REPOSITORY_URL
-ARG REVISION
-ARG VERSION
-
-LABEL maintainer="Sebastian Neb <Sebastian.Neb@me.com>"
-LABEL name="sebastianneb/aws_deployer"
-LABEL title="AWS Deployer"
-LABEL org.opencontainers.image.created=$BUILD_TIME
-LABEL org.opencontainers.image.authors="Sebastian Neb <Sebastian.Neb@me.com>"
-LABEL org.opencontainers.image.url=$REPOSITORY_URL
-LABEL org.opencontainers.image.documentation=$REPOSITORY_URL
-LABEL org.opencontainers.image.source=$REPOSITORY_URL
-LABEL org.opencontainers.image.version=$VERSION
-LABEL org.opencontainers.image.revision=$REVISION
-LABEL org.opencontainers.image.vendor="Sebastian Neb"
-LABEL org.opencontainers.image.title="AWS Deployer"
-LABEL org.opencontainers.image.description="Simple Docker image based on debian:buster-slim that contains aws-cli and sam-cli"
-
 # Install needed basics
 # hadolint ignore=DL3015
 RUN apt-get update \
@@ -54,5 +35,25 @@ ENV SAM_VERSION 0.37.0
 RUN brew tap aws/tap \
   && brew install aws-sam-cli \
   && sam --version
+
+# Labels
+ARG BUILD_TIME
+ARG REPOSITORY_URL
+ARG REVISION
+ARG VERSION
+
+LABEL maintainer="Sebastian Neb <Sebastian.Neb@me.com>"
+LABEL name="sebastianneb/aws_deployer"
+LABEL title="AWS Deployer"
+LABEL org.opencontainers.image.created=$BUILD_TIME
+LABEL org.opencontainers.image.authors="Sebastian Neb <Sebastian.Neb@me.com>"
+LABEL org.opencontainers.image.url=$REPOSITORY_URL
+LABEL org.opencontainers.image.documentation=$REPOSITORY_URL
+LABEL org.opencontainers.image.source=$REPOSITORY_URL
+LABEL org.opencontainers.image.version=$VERSION
+LABEL org.opencontainers.image.revision=$REVISION
+LABEL org.opencontainers.image.vendor="Sebastian Neb"
+LABEL org.opencontainers.image.title="AWS Deployer"
+LABEL org.opencontainers.image.description="Simple Docker image based on debian:buster-slim that contains aws-cli and sam-cli"
 
 CMD ["/bin/bash"]

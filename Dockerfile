@@ -20,7 +20,7 @@ WORKDIR /home/aws
 
 # Install aws-cli
 ENV AWS_VERSION 1.16.302
-RUN pip install awscli --upgrade --user
+RUN pip install awscli==1.16.302 --upgrade --user
 
 # Install and configure brew
 ENV BREW_VERSION 2.2.1

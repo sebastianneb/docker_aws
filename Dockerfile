@@ -32,8 +32,11 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/mast
 # Install and configure sam
 ENV SAM_VERSION 0.40.0
 RUN brew tap aws/tap \
-  && brew install aws-sam-cli@0.40.0 \
+  && brew install aws-sam-cli \
   && sam --version
+
+# Cleanup brew
+RUN brew clean
 
 # Labels
 ARG BUILD_TIME

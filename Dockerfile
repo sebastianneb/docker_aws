@@ -20,8 +20,7 @@ WORKDIR /home/aws
 
 # Install aws-cli
 ENV AWS_VERSION 1.16.302
-ENV CFN_LINT_VERSION 0.26.2
-RUN pip install awscli==$AWS_VERSION cfn-lint==$CFN_LINT_VERSION --upgrade --user --no-cache-dir
+RUN pip install awscli==$AWS_VERSION --upgrade --user --no-cache-dir
 
 # Install and configure brew
 ENV BREW_VERSION 2.2.1
@@ -33,6 +32,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/mast
 ENV SAM_VERSION 0.40.0
 RUN brew tap aws/tap \
   && brew install aws-sam-cli \
+  && brew install cfn-lint \
   && sam --version
 
 # Cleanup brew

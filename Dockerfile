@@ -36,7 +36,7 @@ RUN brew tap aws/tap \
   && sam --version
 
 # Cleanup brew
-RUN brew clean
+RUN brew cleanup
 
 # Labels
 ARG BUILD_TIME
